@@ -9,7 +9,7 @@ import (
 func main() {
 	c := colly.NewCollector()
 
-	c.OnHTML(".l-listing__item .c-card-event--result__headline a", func(e *colly.HTMLElement) {
+	c.OnHTML(".c-card-event--result__headline a", func(e *colly.HTMLElement) {
 		fmt.Println(e.Text)
 	})
 
