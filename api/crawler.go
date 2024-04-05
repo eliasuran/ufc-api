@@ -9,9 +9,16 @@ import (
 	"github.com/gocolly/colly/v2"
 )
 
-type Fight struct {
+type Events struct {
+	Events []Event
+}
+
+type Event struct {
 	Fighter1 string
 	Fighter2 string
+	Date     string
+	Time     string
+	Card     string
 }
 
 func check(error error) {
@@ -24,24 +31,25 @@ func check(error error) {
 func main() {
 	c := colly.NewCollector()
 
-	fights := []Fight{}
+	events := Events{}
 
-	c.OnHTML(".c-card-event--result__headline a", func(e *colly.HTMLElement) {
-		fighter1 := strings.Split(e.Text, " vs ")[0]
-		fighter2 := strings.Split(e.Text, " vs ")[1]
+	c.OnHTML(".c-card-event--result", func(e *colly.HTMLElement) {
+		fighters := strings.Split(e.ChildText(".c-card-event--result__headline a"), " ")
 
-		fight := Fight{Fighter1: fighter1, Fighter2: fighter2}
+		info := strings.Split(e.ChildText(".c-card-event--result__date a"), " / ")
 
-		fights = append(fights, fight)
+		event := Event{Fighter1: fighters[0], Fighter2: fighters[2], Date: info[0], Time: info[1], Card: info[2]}
+
+		events.Events = append(events.Events, event)
 	})
 
 	c.Visit("https://www.ufc.com/events")
 
-	content, err := json.Marshal(fights)
+	content, err := json.Marshal(events)
 	check(err)
 
 	err = os.WriteFile("./data/fights.json", content, 0644)
 	check(err)
 
-	fmt.Println(fights)
+	fmt.Println(events)
 }
