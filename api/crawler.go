@@ -45,7 +45,7 @@ func main() {
 
 	c.Visit("https://www.ufc.com/events")
 
-	content, err := json.Marshal(events)
+	content, err := json.MarshalIndent(events, "", "    ")
 	check(err)
 
 	err = os.WriteFile("./data/fights.json", content, 0644)
