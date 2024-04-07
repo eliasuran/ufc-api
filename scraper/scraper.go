@@ -48,7 +48,7 @@ func main() {
 	content, err := json.MarshalIndent(events, "", "    ")
 	check(err)
 
-	err = os.WriteFile("./data/fights.json", content, 0644)
+	err = os.WriteFile("/data/fights.json", content, 0644)
 	check(err)
 
 	fmt.Println(events)

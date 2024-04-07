@@ -22,11 +22,11 @@ func main() {
 	router := http.NewServeMux()
 
 	router.HandleFunc("GET /", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprintln(w, "xdd says hello")
+		fmt.Fprintln(w, "hello from xdd")
 	})
 
 	router.HandleFunc("GET /fights", func(w http.ResponseWriter, r *http.Request) {
-		fightsJSON, err := os.ReadFile("../crawler/data/fights.json")
+		fightsJSON, err := os.ReadFile("/data/fights.json")
 		if err != nil {
 			fmt.Fprintf(w, "Could not read file: %v\n", err)
 			return
