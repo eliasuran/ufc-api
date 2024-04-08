@@ -1,17 +1,27 @@
 name: ufc-api
 
 services:
+  # go api
   api:
     build: ./api
+    # the port that api is running on
     ports:
       - "8080:8080"
     volumes:
       - data-volume:/data
 
+  # go scraper
   scraper:
     build: ./scraper
     volumes:
       - data-volume:/data
 
+  # example website (remove if you have own hosting solution)
+  website:
+    build: ./website
+    ports:
+      - "3000:3000"
+
+# shared volume from json files
 volumes:
   data-volume:
