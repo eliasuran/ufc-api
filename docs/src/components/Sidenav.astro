@@ -1,11 +1,12 @@
 ---
 import { getCollection } from "astro:content";
+import _ from "lodash";
 
 // getting everything from the pages collection (src/content/pages)
 const pages = await getCollection("pages");
 
 // sorting by category
-const sortedCategory = Object.groupBy(pages, ({ data }) => data.category);
+const sortedCategory = _.groupBy(pages, ({ data }) => data.category);
 
 // sorting alphabetically (there is a letter in front of each category name, this is not displayed on the frontend but used to sort)
 const sorted = Object.entries(sortedCategory).toSorted();
