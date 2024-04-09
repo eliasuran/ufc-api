@@ -7,6 +7,8 @@ interface Props {
 }
 
 const { title, desc } = Astro.props;
+
+import Sidenav from "../components/Sidenav.astro";
 ---
 
 <html lang="en">
@@ -20,8 +22,10 @@ const { title, desc } = Astro.props;
     <meta name="title" content={title} />
     <meta name="description" content={desc} />
   </head>
-  <body class="absolute-x-hidden flex">
-    <div class="w-46 bg-red-400"></div>
-    <slot />
+  <body class="absolute font-mono overflow-hidden bg-bg text-text flex">
+    <Sidenav />
+    <div class="p-12">
+      <slot />
+    </div>
   </body>
 </html>

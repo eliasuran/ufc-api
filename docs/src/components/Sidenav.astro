@@ -1,5 +1,36 @@
 ---
+import { getCollection } from "astro:content";
 
+// getting everything from the pages collection (src/content/pages)
+const pages = await getCollection("pages");
+
+// sorting by category
+const sortedCategory = Object.groupBy(pages, ({ data }) => data.category);
+
+// sorting alphabetically (there is a letter in front of each category name, this is not displayed on the frontend but used to sort)
+const sorted = Object.entries(sortedCategory).toSorted();
 ---
 
-<div></div>
+<div
+  class="w-64 p-6 h-screen bg-primary flex flex-col overflow-y-scroll text-bg"
+>
+  <a href="/" class="text-3xl my-2 italic font-bold">ufc-api</a>
+  {
+    sorted.map((category) => (
+      <>
+        <a href={`/${category[1] && category[1][0].slug}`} class="text-lg">
+          {category[0].split(" ").slice(1).join(" ")}
+        </a>
+        {category[1] &&
+          category[1].map((page) => (
+            <a
+              href={`/${page.slug}`}
+              class={`${page.slug === Astro.url.pathname.split("/")[1] && "font-bold"} hover:underline rounded-md ml-4 p-1`}
+            >
+              {page.data.title}
+            </a>
+          ))}
+      </>
+    ))
+  }
+</div>

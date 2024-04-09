@@ -1,24 +1,97 @@
 ---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
 import { getCollection, type CollectionEntry } from "astro:content";
 
 export async function getStaticPaths() {
   const pages = await getCollection("pages");
-  return pages.map((page: CollectionEntry<"page">) => ({
+  return pages.map((page) => ({
     params: { slug: page.slug },
     props: { page },
   }));
 }
 
 interface Props {
-  page: CollectionEntry<"page">;
+  page: CollectionEntry<"pages">;
 }
 
-const {
-  page,
-  page: {
-    data: { title, desc },
-  },
-} = Astro.props;
+const { page } = Astro.props;
 
 const { Content } = await page.render();
 ---
+
+<BaseLayout title={page.data.title} desc={page.data.desc}>
+  <div class="text-text prose h-screen overflow-y-scroll">
+    <Content />
+  </div>
+</BaseLayout>
+
+<style is:global>
+  .prose {
+    line-height: 1.4;
+    font-size: 1rem;
+  }
+
+  .prose p {
+    margin: 3px 0;
+  }
+
+  .prose h1,
+  .prose h2,
+  .prose h3,
+  .prose h4 {
+    margin: 12px 0;
+  }
+
+  .prose h1 {
+    font-size: 2.5rem;
+  }
+
+  .prose h2 {
+    font-size: 2rem;
+  }
+
+  .prose h3 {
+    font-size: 1.75rem;
+  }
+
+  .prose h4 {
+    font-size: 1.7rem;
+  }
+
+  .prose a {
+    color: #007bff;
+    text-decoration: none;
+    border-bottom: 1px solid #007bff;
+  }
+
+  .prose pre {
+    padding: 15px;
+    border-radius: 5px;
+    overflow: auto;
+    margin: 12px 0;
+  }
+
+  .prose code {
+    font-size: 14px;
+  }
+
+  .prose blockquote {
+    border-left: 4px solid #007bff;
+    margin: 0;
+    padding-left: 15px;
+    color: #555;
+  }
+
+  .prose ul,
+  .prose ol {
+    margin-bottom: 20px;
+    list-style: disc;
+  }
+
+  .prose img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+  }
+</style>
