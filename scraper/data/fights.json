@@ -1,13 +1,7 @@
 {
     "Events": [
         {
-            "Fighter1": "Allen",
-            "Fighter2": "Curtis",
-            "Date": "Sat, Apr 6",
-            "Time": "6:00 PM EDT",
-            "Card": "Main Card"
-        },
-        {
+            "ID": 0,
             "Fighter1": "Pereira",
             "Fighter2": "Hill",
             "Date": "Sat, Apr 13",
@@ -15,6 +9,7 @@
             "Card": "Main Card"
         },
         {
+            "ID": 1,
             "Fighter1": "Nicolau",
             "Fighter2": "Perez",
             "Date": "Sat, Apr 27",
@@ -22,6 +17,7 @@
             "Card": "Main Card"
         },
         {
+            "ID": 2,
             "Fighter1": "Pantoja",
             "Fighter2": "Erceg",
             "Date": "Sat, May 4",
@@ -29,6 +25,7 @@
             "Card": "Main Card"
         },
         {
+            "ID": 3,
             "Fighter1": "Lewis",
             "Fighter2": "Nascimento",
             "Date": "Sat, May 11",
@@ -36,6 +33,7 @@
             "Card": "Main Card"
         },
         {
+            "ID": 4,
             "Fighter1": "Barboza",
             "Fighter2": "Murphy",
             "Date": "Sat, May 18",
@@ -43,6 +41,7 @@
             "Card": "Main Card"
         },
         {
+            "ID": 5,
             "Fighter1": "TBD",
             "Fighter2": "TBD",
             "Date": "Sat, Jun 1",
@@ -50,6 +49,7 @@
             "Card": "Main Card"
         },
         {
+            "ID": 6,
             "Fighter1": "Whittaker",
             "Fighter2": "Chimaev",
             "Date": "Sat, Jun 22",
@@ -57,6 +57,23 @@
             "Card": "Main Card"
         },
         {
+            "ID": 7,
+            "Fighter1": "TBD",
+            "Fighter2": "TBD",
+            "Date": "Sat, Jun 29",
+            "Time": "10:00 PM EDT",
+            "Card": "Main Card"
+        },
+        {
+            "ID": 8,
+            "Fighter1": "Allen",
+            "Fighter2": "Curtis",
+            "Date": "Sat, Apr 6",
+            "Time": "6:00 PM EDT",
+            "Card": "Main Card"
+        },
+        {
+            "ID": 9,
             "Fighter1": "Blanchfield",
             "Fighter2": "Fiorot",
             "Date": "Sat, Mar 30",
@@ -64,6 +81,7 @@
             "Card": "Main Card"
         },
         {
+            "ID": 10,
             "Fighter1": "Ribas",
             "Fighter2": "Namajunas",
             "Date": "Sat, Mar 23",
@@ -71,6 +89,7 @@
             "Card": "Main Card"
         },
         {
+            "ID": 11,
             "Fighter1": "Tuivasa",
             "Fighter2": "Tybura",
             "Date": "Sat, Mar 16",
@@ -78,6 +97,7 @@
             "Card": "Main Card"
         },
         {
+            "ID": 12,
             "Fighter1": "O'Malley",
             "Fighter2": "Vera",
             "Date": "Sat, Mar 9",
@@ -85,6 +105,7 @@
             "Card": "Main Card"
         },
         {
+            "ID": 13,
             "Fighter1": "Rozenstruik",
             "Fighter2": "Gaziev",
             "Date": "Sat, Mar 2",
@@ -92,6 +113,7 @@
             "Card": "Main Card"
         },
         {
+            "ID": 14,
             "Fighter1": "Moreno",
             "Fighter2": "Royval",
             "Date": "Sat, Feb 24",
@@ -99,17 +121,11 @@
             "Card": "Main Card"
         },
         {
+            "ID": 15,
             "Fighter1": "Volkanovski",
             "Fighter2": "Topuria",
             "Date": "Sat, Feb 17",
             "Time": "10:00 PM EST",
-            "Card": "Main Card"
-        },
-        {
-            "Fighter1": "Hermansson",
-            "Fighter2": "Pyfer",
-            "Date": "Sat, Feb 10",
-            "Time": "7:00 PM EST",
             "Card": "Main Card"
         }
     ]

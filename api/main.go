@@ -26,6 +26,8 @@ func main() {
 	})
 
 	router.HandleFunc("GET /fights", func(w http.ResponseWriter, r *http.Request) {
+		// use '../scraper/data/fights.json' when developing locally
+		// use 'data/fights.json' when deploying or developing with docker container
 		fightsJSON, err := os.ReadFile("/data/fights.json")
 		if err != nil {
 			fmt.Fprintf(w, "Could not read file: %v\n", err)
