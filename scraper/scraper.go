@@ -63,7 +63,7 @@ func scraper() {
 
 	// use './data/fights.json' when developing locally
 	// use '/data/fights.json' when deploying or when devoloping with docker container
-	err = os.WriteFile("./data/fights.json", content, 0644)
+	err = os.WriteFile("/data/fights.json", content, 0644)
 	check(err)
 
 	fmt.Println("Scraper ran successfully")
