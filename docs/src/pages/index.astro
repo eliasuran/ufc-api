@@ -5,23 +5,26 @@ import { Icon } from "astro-icon/components";
 ---
 
 <BaseLayout title="Home" desc="landing page for ufc-api docs">
-  <div class="flex flex-col h-1/2 justify-between p-16">
-    <div class="font-bold italic space-y-2">
-      <h1 class="text-7xl">ufc-api</h1>
-      <h2 class="text-xl">Self hosted scraper and api for ufc.com</h2>
+  <div class="p-16 flex flex-col h-full">
+    <div class="flex flex-col h-1/2 justify-between">
+      <div class="font-bold italic space-y-2">
+        <h1 class="text-7xl">ufc-api</h1>
+        <h2 class="text-xl">Self hosted scraper and api for ufc</h2>
+      </div>
+      <div class="flex rounded-full overflow-hidden text-bg">
+        <a
+          href="https://github.com/eliasuran/ufc-api"
+          class="hover:underline items-center bg-primary px-4 flex gap-2 text-lg py-2"
+          ><Icon name="mdi:github" size={30} />Github</a
+        >
+        <div class="h-full bg-text w-[2px]"></div>
+        <a
+          href="/introduction"
+          class="hover:underline flex items-center gap-2 bg-secondary rounded-r-full px-4 text-lg py-2"
+          ><Icon name="mdi:file-document" size={30} />Docs</a
+        >
+      </div>
     </div>
-    <div class="flex rounded-full overflow-hidden text-bg">
-      <a
-        href="https://github.com/eliasuran/ufc-api"
-        class="hover:underline items-center bg-primary px-4 flex gap-2 text-lg py-2"
-        ><Icon name="mdi:github" size={30} />Github</a
-      >
-      <div class="h-full bg-text w-[2px]"></div>
-      <a
-        href="/introduction"
-        class="hover:underline flex items-center gap-2 bg-secondary rounded-r-full px-4 text-lg py-2"
-        ><Icon name="mdi:file-document" size={30} />Docs</a
-      >
-    </div>
+    <div class="flex flex-wrap gap-2"></div>
   </div>
 </BaseLayout>

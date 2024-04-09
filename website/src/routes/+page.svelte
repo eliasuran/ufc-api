@@ -1,17 +1,22 @@
 <script lang="ts">
-	import SportCard from '../components/SportCard.svelte';
+	import type { Events } from '$lib/types';
+
+	export let data: Events;
+
+	const events = data.Events;
 </script>
 
-<div class="flex h-full flex-col items-center justify-evenly sm:flex-row">
-	<SportCard
-		src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/UFC_Logo.svg/1600px-UFC_Logo.svg.png"
-		alt="ufc logo"
-		href="/ufc"
-	/>
-	<SportCard
-		src="https://cdn.freebiesupply.com/images/large/2x/nba-logo-transparent.png"
-		alt="nba logo"
-		href="#"
-		active={false}
-	/>
+<div class="flex flex-col gap-4">
+	<div class="text-4xl">Upcoming fights</div>
+	{#each events as eventData}
+		<div class="flex flex-col">
+			<div class="flex text-lg">
+				{eventData.Fighter1} vs {eventData.Fighter2}
+			</div>
+			<div class="text-sm">
+				{eventData.Date} | {eventData.Time} | {eventData.Card}
+			</div>
+			<a href="/" class="underline">More info</a>
+		</div>
+	{/each}
 </div>
