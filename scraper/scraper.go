@@ -1,10 +1,5 @@
 package main
 
-// hva har jeg gjort denne runden
-// - scraper kjører en gang i timen
-// - får data om spesifik fight og skriver til egne jsonFiler
-// - la til response
-
 import (
 	"encoding/json"
 	"fmt"
@@ -26,10 +21,6 @@ type Event struct {
 	Date     string
 	Time     string
 	Card     string
-}
-
-type AllEventInfo struct {
-	Events []EventInfo
 }
 
 type EventInfo struct {
@@ -71,6 +62,10 @@ func check(error error) {
 func scraper() {
 	fmt.Println("Starting scraper...")
 
+	// use './data/' when developing locally
+	// use '/data/' when deploying or when devoloping with docker container
+	dataPath := "./data/"
+
 	c := colly.NewCollector()
 
 	events := Events{}
@@ -93,10 +88,14 @@ func scraper() {
 		// getting the url where there is more info about the fight
 		link := e.ChildAttr(".c-card-event--result__headline a", "href")
 
+		// getting the last part of the url for event name
+		splitLink := strings.Split(link, "/")
+		eventName := splitLink[len(splitLink)-1]
+
+		eventInfo := EventInfo{ID: id, EventName: eventName}
+
 		///// starting new collector /////
 		d := colly.NewCollector()
-
-		eventInfo := EventInfo{ID: id, EventName: link}
 
 		d.OnHTML(".c-listing-fight__content-row", func(h *colly.HTMLElement) {
 			title := h.ChildText(".c-listing-fight__class-text")
@@ -107,7 +106,7 @@ func scraper() {
 			content, err := json.MarshalIndent(eventInfo, "", "    ")
 			check(err)
 
-			fileName := fmt.Sprintf("./data/event_%d.json", id)
+			fileName := fmt.Sprintf(dataPath+"event_%d.json", id)
 			err = os.WriteFile(fileName, content, 0644)
 			check(err)
 		})
@@ -127,9 +126,7 @@ func scraper() {
 	content, err := json.MarshalIndent(events, "", "    ")
 	check(err)
 
-	// use './data/fights.json' when developing locally
-	// use '/data/fights.json' when deploying or when devoloping with docker container
-	err = os.WriteFile("./data/fights.json", content, 0644)
+	err = os.WriteFile(dataPath+"fights.json", content, 0644)
 	check(err)
 
 	fmt.Println("Wrote JSON for schedule")

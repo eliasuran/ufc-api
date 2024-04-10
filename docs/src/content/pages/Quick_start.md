@@ -35,9 +35,9 @@ cd ufc-api
 
 Start the docker container
 ```bash
-sudo docker compose up --build
+sudo docker compose up
 ```
-NOTE: Everytime a new feature is introduced, make sure to run docker compose up with the --build flag. You can omit it otherwise
+NOTE: Everytime a new feature is introduced, make sure to run docker compose up with the --build flag. Otherwise, you can omit it.
 
 #### Congrats 🎉
 
