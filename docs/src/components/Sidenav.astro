@@ -13,7 +13,7 @@ const sorted = Object.entries(sortedCategory).toSorted();
 ---
 
 <div
-  class="w-64 p-6 h-screen bg-primary flex flex-col overflow-y-scroll text-bg"
+  class="min-w-64 p-6 h-screen bg-primary flex flex-col overflow-y-scroll text-bg"
 >
   <a href="/" class="text-3xl my-2 italic font-bold">ufc-api</a>
   {
@@ -23,14 +23,16 @@ const sorted = Object.entries(sortedCategory).toSorted();
           {category[0].split(" ").slice(1).join(" ")}
         </a>
         {category[1] &&
-          category[1].map((page) => (
-            <a
-              href={`/${page.slug}`}
-              class={`${page.slug === Astro.url.pathname.split("/")[1] && "font-bold"} hover:underline rounded-md ml-4 p-1`}
-            >
-              {page.data.title}
-            </a>
-          ))}
+          category[1]
+            .sort((a, b) => a.data.order - b.data.order)
+            .map((page) => (
+              <a
+                href={`/${page.slug}`}
+                class={`${page.slug === Astro.url.pathname.split("/")[1] && "font-bold"} hover:underline rounded-md ml-4 p-1`}
+              >
+                {page.data.title}
+              </a>
+            ))}
       </>
     ))
   }

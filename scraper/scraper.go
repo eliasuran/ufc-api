@@ -24,7 +24,9 @@ type Event struct {
 }
 
 type EventInfo struct {
-	MainCard MainCard
+	ID        int
+	EventName string
+	MainCard  MainCard
 	// TODO: add more cards
 }
 
@@ -33,11 +35,7 @@ type MainCard struct {
 }
 
 type Fight struct {
-	Title        string
-	Fighter1     FighterData
-	Fighter2     FighterData
-	Fighter1Odds int
-	Fighter2Odds int
+	Title string
 }
 
 type FighterData struct {
@@ -82,7 +80,18 @@ func scraper() {
 		// appending the event instance to Events
 		events.Events = append(events.Events, event)
 
+		// getting the url where there is more info about the fight
+		link := e.ChildAttr(".c-card-event--result__headline a", "href")
+
 		// starting new collector
+		d := colly.NewCollector()
+
+		d.OnHTML(".c-listing-fight__content-row", func(h *colly.HTMLElement) {
+			fighter1 := e.ChildText(".c-listing-fight__corner-given-name") + e.ChildText("c-listing-fight__corner-family-name")
+			fmt.Println("FIgher1:", fighter1)
+		})
+
+		d.Visit("https://www.ufc.com" + link)
 
 		// appending id at the end
 		id += 1
@@ -97,7 +106,7 @@ func scraper() {
 
 	// use './data/fights.json' when developing locally
 	// use '/data/fights.json' when deploying or when devoloping with docker container
-	err = os.WriteFile("/data/fights.json", content, 0644)
+	err = os.WriteFile("./data/fights.json", content, 0644)
 	check(err)
 
 	fmt.Println("Scraper ran successfully")
