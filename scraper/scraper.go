@@ -64,7 +64,7 @@ func scraper() {
 
 	// use './data/' when developing locally
 	// use '/data/' when deploying or when devoloping with docker container
-	dataPath := "./data/"
+	dataPath := "/data/"
 
 	c := colly.NewCollector()
 
