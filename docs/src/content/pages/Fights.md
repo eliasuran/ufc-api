@@ -1,5 +1,5 @@
 ---
-title: "Fights"
+title: "Get fights"
 desc: "The fights endpoint"
 category: "b API reference"
 order: 2
@@ -22,9 +22,18 @@ endpoint: "/fights"
 
 ---
 
+200:
+```
 {
     Events: [
-        
-            
+        {
+            ID        string
+            Fighter1  string
+            Fighter2  string
+            Date:     string
+            Time:     string
+            Card:     string
+        }
     ]
 }
+```

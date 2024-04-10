@@ -21,8 +21,10 @@ const { Content } = await page.render();
 ---
 
 <BaseLayout title={page.data.title} desc={page.data.desc}>
-  <div class="text-text prose h-screen overflow-y-scroll">
-    <Content />
+  <div class="text-text h-screen overflow-y-scroll">
+    <div class="prose">
+      <Content />
+    </div>
   </div>
 </BaseLayout>
 

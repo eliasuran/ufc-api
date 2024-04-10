@@ -13,4 +13,6 @@ In this section you will find the different api-endpoints you can send requests 
 
 Currently available endpoints:
 
-<a href="fights">fights</a>
+<a href="fights">Get fights</a>
+
+<a href="fight">Get fight by id</a>
