@@ -1,6 +1,12 @@
-import type { PageServerLoad } from '../../$types';
+import { fetchApi } from '$lib/api';
+import type { PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async ({ params }) => {
-	const id = params;
-	return id;
+	const data = await fetchApi(`fights/${params.fight}`, 'GET');
+	if (data.status !== 200) {
+		console.log(data.error);
+		return {};
+	}
+
+	return data.data;
 };
