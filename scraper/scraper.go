@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os"
 	"strings"
+	"time"
 
 	"github.com/gocolly/colly/v2"
 )
@@ -22,10 +23,36 @@ type Event struct {
 	Card     string
 }
 
+type EventInfo struct {
+	MainCard MainCard
+	// TODO: add more cards
+}
+
+type MainCard struct {
+	Fights []Fight
+}
+
+type Fight struct {
+	Title        string
+	Fighter1     FighterData
+	Fighter2     FighterData
+	Fighter1Odds int
+	Fighter2Odds int
+}
+
+type FighterData struct {
+	Name    string
+	Status  string
+	Country string
+}
+
 func main() {
-	// TODO: run this function every 1 hour (something less is okay for testing)
-	// log the time each time it scrapes
-	scraper()
+	// DONE: run this function every 1 hour (something less is okay for testing)
+	for {
+		// TODO: log the time each time it scrapes
+		scraper()
+		time.Sleep(1 * time.Hour)
+	}
 }
 
 func check(error error) {
@@ -40,18 +67,25 @@ func scraper() {
 
 	events := Events{}
 
-	// TODO: assign id to each event
-	// id := 0
+	id := 0
 
 	c.OnHTML(".c-card-event--result", func(e *colly.HTMLElement) {
+		// getting fighters
 		fighters := strings.Split(e.ChildText(".c-card-event--result__headline a"), " ")
 
+		// getting info like date and time
 		info := strings.Split(e.ChildText(".c-card-event--result__date a"), " / ")
 
-		event := Event{Fighter1: fighters[0], Fighter2: fighters[2], Date: info[0], Time: info[1], Card: info[2]}
+		// putting data into an instance of the Event struct
+		event := Event{ID: id, Fighter1: fighters[0], Fighter2: fighters[2], Date: info[0], Time: info[1], Card: info[2]}
 
+		// appending the event instance to Events
 		events.Events = append(events.Events, event)
 
+		// starting new collector
+
+		// appending id at the end
+		id += 1
 	})
 
 	// TODO: make function to click on link and get more data about event
