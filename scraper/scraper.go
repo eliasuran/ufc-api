@@ -10,6 +10,10 @@ import (
 	"github.com/gocolly/colly/v2"
 )
 
+type LastScraped struct {
+	LastScrape string
+}
+
 type Events struct {
 	Events []Event
 }
@@ -46,8 +50,16 @@ type FighterData struct {
 
 func main() {
 	for {
-		// TODO: log the time each time it scrapes
+		// writing the time of scraping to json
+		t := time.Now()
+		content, err := json.MarshalIndent(t.Format("02.01.2006 15:04:05"), "", "    ")
+		check(err)
+		writeJSON(content, "/data/lastScraped.json")
+
+		// running scraper
 		scraper()
+
+		// waiting 1 hour
 		time.Sleep(1 * time.Hour)
 	}
 }
@@ -57,6 +69,11 @@ func check(error error) {
 		fmt.Println(error)
 		os.Exit(1)
 	}
+}
+
+func writeJSON(data []byte, path string) {
+	err := os.WriteFile(path, data, 0644)
+	check(err)
 }
 
 func scraper() {
@@ -107,8 +124,8 @@ func scraper() {
 			check(err)
 
 			fileName := fmt.Sprintf(dataPath+"event_%d.json", id)
-			err = os.WriteFile(fileName, content, 0644)
-			check(err)
+
+			writeJSON(content, fileName)
 		})
 
 		fmt.Println("Wrote JSON for fight: ", id)
@@ -126,8 +143,7 @@ func scraper() {
 	content, err := json.MarshalIndent(events, "", "    ")
 	check(err)
 
-	err = os.WriteFile(dataPath+"fights.json", content, 0644)
-	check(err)
+	writeJSON(content, dataPath+"fights.json")
 
 	fmt.Println("Wrote JSON for schedule")
 
