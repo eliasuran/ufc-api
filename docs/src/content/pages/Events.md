@@ -1,11 +1,11 @@
 ---
-title: "Get fights"
-desc: "The fights endpoint"
+title: "Get events"
+desc: "The events endpoint"
 category: "b API reference"
 order: 2
 ---
 
-# Fights
+# Events
 
 #### Get the schedule of upcoming fights
 
@@ -16,7 +16,7 @@ order: 2
 
 method: "GET"
 
-endpoint: "/fights"
+endpoint: "/events"
 
 #### Response
 

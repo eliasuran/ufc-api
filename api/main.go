@@ -23,8 +23,8 @@ func main() {
 		fmt.Fprintln(w, "hello from xdd")
 	})
 
-	router.HandleFunc("GET /fights", func(w http.ResponseWriter, r *http.Request) {
-		fightsJSON, err := os.ReadFile(dataPath + "fights.json")
+	router.HandleFunc("GET /events", func(w http.ResponseWriter, r *http.Request) {
+		fightsJSON, err := os.ReadFile(dataPath + "events.json")
 		if err != nil {
 			fmt.Fprintf(w, "Could not read file: %v\n", err)
 			return
@@ -33,7 +33,7 @@ func main() {
 		fmt.Fprintln(w, string(fightsJSON))
 	})
 
-	router.HandleFunc("GET /fights/{id}", func(w http.ResponseWriter, r *http.Request) {
+	router.HandleFunc("GET /events/{id}", func(w http.ResponseWriter, r *http.Request) {
 		id := r.PathValue("id")
 		json, err := os.ReadFile(dataPath + "event_" + id + ".json")
 		if err != nil {

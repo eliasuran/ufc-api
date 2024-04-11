@@ -149,7 +149,7 @@ func scraper(dataPath string) {
 	content, err := json.MarshalIndent(events, "", "    ")
 	check(err)
 
-	writeJSON(content, dataPath+"fights.json")
+	writeJSON(content, dataPath+"events.json")
 
 	fmt.Println("Wrote JSON for schedule")
 

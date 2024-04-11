@@ -1,13 +1,13 @@
 ---
-title: "Get fight by id"
-desc: "The fight/{id} endpoint"
+title: "Get event by id"
+desc: "The event/{id} endpoint"
 category: "b API reference"
 order: 3
 ---
 
-# Fight
+# Event
 
-#### Get data about a fight by id
+#### Get data about an event by id
 
 
 #### Request
@@ -16,7 +16,7 @@ order: 3
 
 method: "GET"
 
-endpoint: "/fights/{id}"
+endpoint: "/events/{id}"
 
 #### Response
 
