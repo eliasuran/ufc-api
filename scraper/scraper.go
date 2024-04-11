@@ -54,7 +54,7 @@ func main() {
 		t := time.Now()
 		content, err := json.MarshalIndent(t.Format("02.01.2006 15:04:05"), "", "    ")
 		check(err)
-		writeJSON(content, "/data/lastScraped.json")
+		writeJSON(content, "./data/lastScraped.json")
 
 		// running scraper
 		scraper()
@@ -72,7 +72,7 @@ func check(error error) {
 }
 
 func writeJSON(data []byte, path string) {
-	err := os.WriteFile(path, data, 0644)
+	err := os.WriteFile(path, data, 0666)
 	check(err)
 }
 
@@ -81,7 +81,7 @@ func scraper() {
 
 	// use './data/' when developing locally
 	// use '/data/' when deploying or when devoloping with docker container
-	dataPath := "/data/"
+	dataPath := "./data/"
 
 	c := colly.NewCollector()
 
