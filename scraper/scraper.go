@@ -8,6 +8,7 @@ import (
 	"time"
 
 	"github.com/gocolly/colly/v2"
+	"github.com/joho/godotenv"
 )
 
 type LastScraped struct {
@@ -49,15 +50,24 @@ type FighterData struct {
 }
 
 func main() {
+	// loading env vars from .env
+	err := godotenv.Load()
+	if err != nil {
+		fmt.Println("no env file found, trying to access elsewhere")
+	}
+
+	// defining dataPath
+	dataPath := os.Getenv("DATA_PATH")
+
 	for {
 		// writing the time of scraping to json
 		t := time.Now()
 		content, err := json.MarshalIndent(t.Format("02.01.2006 15:04:05"), "", "    ")
 		check(err)
-		writeJSON(content, "./data/lastScraped.json")
+		writeJSON(content, dataPath+"lastScraped.json")
 
 		// running scraper
-		scraper()
+		scraper(dataPath)
 
 		// waiting 1 hour
 		time.Sleep(1 * time.Hour)
@@ -76,12 +86,8 @@ func writeJSON(data []byte, path string) {
 	check(err)
 }
 
-func scraper() {
+func scraper(dataPath string) {
 	fmt.Println("Starting scraper...")
-
-	// use './data/' when developing locally
-	// use '/data/' when deploying or when devoloping with docker container
-	dataPath := "./data/"
 
 	c := colly.NewCollector()
 

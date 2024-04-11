@@ -4,12 +4,18 @@ import (
 	"fmt"
 	"net/http"
 	"os"
+
+	"github.com/joho/godotenv"
 )
 
 func main() {
-	// use '../scraper/data/' when developing locally
-	// use '/data/' when deploying or developing with docker container
-	dataPath := "/data/"
+	// loading env vars from .env
+	err := godotenv.Load()
+	if err != nil {
+		fmt.Println("no env file found, trying to access elsewhere")
+	}
+
+	dataPath := os.Getenv("DATA_PATH")
 
 	router := http.NewServeMux()
 

@@ -3,15 +3,21 @@ name: ufc-api
 services:
   # go api
   api:
+    environment:
+      - DATA_PATH=/data/
     build: ./api
     # the port that api is running on
     ports:
       - "8080:8080"
     volumes:
       - data-volume:/data
+    depends_on:
+      - scraper
 
   # go scraper
   scraper:
+    environment:
+      - DATA_PATH=/data/
     build: ./scraper
     volumes:
       - data-volume:/data
