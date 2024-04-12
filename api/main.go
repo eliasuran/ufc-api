@@ -26,10 +26,12 @@ func main() {
 	router.HandleFunc("GET /events", func(w http.ResponseWriter, r *http.Request) {
 		fightsJSON, err := os.ReadFile(dataPath + "events.json")
 		if err != nil {
+			w.WriteHeader(http.StatusInternalServerError)
 			fmt.Fprintf(w, "Could not read file: %v\n", err)
 			return
 		}
 
+		w.WriteHeader(200)
 		fmt.Fprintln(w, string(fightsJSON))
 	})
 
@@ -37,10 +39,12 @@ func main() {
 		id := r.PathValue("id")
 		json, err := os.ReadFile(dataPath + "event_" + id + ".json")
 		if err != nil {
+			w.WriteHeader(http.StatusInternalServerError)
 			fmt.Fprintf(w, "Could not read file: %v\n", err)
 			return
 		}
 
+		w.WriteHeader(200)
 		fmt.Fprintln(w, string(json))
 	})
 
