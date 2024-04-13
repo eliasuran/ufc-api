@@ -25,4 +25,11 @@ interface MainCard {
 
 interface Fight {
 	Title: string;
+	Fighter1: Fighter;
+	Fighter2: Fighter;
+}
+
+interface Fighter {
+	Name: string;
+	Country: string;
 }

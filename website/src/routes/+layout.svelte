@@ -2,6 +2,6 @@
 	import '../app.pcss';
 </script>
 
-<div class="bg-bg p-12 font-mono text-text">
+<div class="min-h-screen bg-bg p-12 font-mono text-text">
 	<slot />
 </div>
